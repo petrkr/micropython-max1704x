@@ -2,7 +2,7 @@
 # Copyright (c) 2023 Petr Kracik
 # Copyright (c) 2023 OctopusLAB
 
-from struct import pack, unpack
+from struct import unpack
 
 __version__ = "0.0.1"
 __license__ = "MIT"
@@ -26,17 +26,17 @@ class MAX1704x:
 
     @property
     def vcell(self):
-        return struct.unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VCELL, 2))[0] * 78.125 / 1_000_000
+        return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VCELL, 2))[0] * 78.125 / 1_000_000
 
 
     @property
     def soc(self):
-        return struct.unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_SOC, 2))[0] / 256.0
+        return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_SOC, 2))[0] / 256.0
 
 
     @property
     def version(self):
-        return struct.unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VER, 2))[0]
+        return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VER, 2))[0]
 
 
     def reset(self):
