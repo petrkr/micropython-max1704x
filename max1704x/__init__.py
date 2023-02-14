@@ -16,6 +16,8 @@ class MAX1704x:
     REG_MODE = 0x06
     REG_VER = 0x08
 
+    REG_CRATE = 0x16
+
     REG_STATUS = 0x1A
     REG_CMD = 0xFE
 
@@ -27,6 +29,11 @@ class MAX1704x:
     @property
     def vcell(self):
         return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VCELL, 2))[0] * 78.125 / 1_000_000
+
+
+    @property
+    def crate(self):
+        return unpack(">h", self._i2c.readfrom_mem(self.ADDRESS, self.REG_CRATE, 2))[0] * 0.208
 
 
     @property
