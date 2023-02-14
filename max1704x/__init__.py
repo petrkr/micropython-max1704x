@@ -43,7 +43,7 @@ class MAX1704x:
 
     @property
     def version(self):
-        return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VER, 2))[0]
+        return unpack(">H", self._i2c.readfrom_mem(self.ADDRESS, self.REG_VER, 2))[0] - 0x0010
 
 
     def reset(self):
